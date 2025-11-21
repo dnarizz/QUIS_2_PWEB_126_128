@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAO {
-    // SELECT ALL
     public List<Book> selectAllBooks() {
         List<Book> books = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
@@ -89,7 +88,6 @@ public class BookDAO {
         return rowDeleted;
     }
 
-    // Method kurangi stok saat dipinjam
     public boolean decreaseStock(int bookId) {
         boolean rowUpdated = false;
         try (Connection conn = DBConnection.getConnection();
@@ -103,7 +101,6 @@ public class BookDAO {
         return rowUpdated;
     }
 
-    // Method tambah stok saat dikembalikan
     public boolean increaseStock(int bookId) {
         boolean rowUpdated = false;
         try (Connection conn = DBConnection.getConnection();
@@ -116,3 +113,4 @@ public class BookDAO {
         return rowUpdated;
     }
 }
+
