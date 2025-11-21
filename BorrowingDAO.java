@@ -8,8 +8,7 @@ import java.util.List;
 
 public class BorrowingDAO {
 
-    // 1. Method untuk Meminjam Buku (INSERT)
-    // Mengembalikan true jika berhasil
+
     public boolean insertBorrowing(int userId, int bookId) {
         boolean isSuccess = false;
         String sql = "INSERT INTO borrowings (id_user, id_book, borrow_date, due_date, status, created_at) " +
@@ -31,7 +30,6 @@ public class BorrowingDAO {
         return isSuccess;
     }
 
-    // 2. Method untuk Mengembalikan Buku (UPDATE status & tanggal kembali)
     public boolean returnBook(int borrowingId) {
         boolean isSuccess = false;
         String sql = "UPDATE borrowings SET status = 'returned', return_date = CURDATE(), updated_at = NOW() WHERE id = ?";
@@ -51,7 +49,6 @@ public class BorrowingDAO {
         return isSuccess;
     }
 
-    // 3. Method untuk Melihat History User (SELECT dengan JOIN ke tabel Books)
     public List<Borrowing> getHistoryByUserId(int userId) {
         List<Borrowing> list = new ArrayList<>();
         // Kita perlu JOIN ke tabel books untuk mengambil judul buku (books.title)
@@ -87,8 +84,6 @@ public class BorrowingDAO {
         return list;
     }
 
-    // 4. Helper: Cek apakah user sedang meminjam buku yang sama (Optional, untuk
-    // validasi)
     public boolean isBookCurrentlyBorrowedByUser(int userId, int bookId) {
         boolean isBorrowed = false;
         String sql = "SELECT id FROM borrowings WHERE id_user = ? AND id_book = ? AND status = 'borrowed'";
@@ -105,4 +100,5 @@ public class BorrowingDAO {
         }
         return isBorrowed;
     }
+
 }
