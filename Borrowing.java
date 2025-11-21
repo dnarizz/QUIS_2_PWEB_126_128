@@ -6,17 +6,15 @@ public class Borrowing {
     private int id;
     private int userId;
     private int bookId;
-    private String bookTitle; // Field tambahan untuk display
+    private String bookTitle; 
     private Date borrowDate;
     private Date returnDate;
     private Date dueDate;
     private String status;
 
-    // Constructor kosong
     public Borrowing() {
     }
 
-    // Constructor lengkap
     public Borrowing(int id, int userId, int bookId, String bookTitle, Date borrowDate, Date returnDate, Date dueDate,
             String status) {
         this.id = id;
@@ -29,7 +27,6 @@ public class Borrowing {
         this.status = status;
     }
 
-    // Getter dan Setter
     public int getId() {
         return id;
     }
@@ -93,4 +90,5 @@ public class Borrowing {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }
