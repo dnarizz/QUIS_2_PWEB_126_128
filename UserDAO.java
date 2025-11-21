@@ -32,8 +32,9 @@ public class UserDAO {
              PreparedStatement ps = conn.prepareStatement("INSERT INTO users (name, email, password, created_at) VALUES (?, ?, ?, NOW())")) {
             ps.setString(1, name);
             ps.setString(2, email);
-            ps.setString(3, password); // Simpan password (sebaiknya di-hash)
+            ps.setString(3, password);
             ps.executeUpdate();
         } catch (Exception e) { e.printStackTrace(); }
     }
+
 }
