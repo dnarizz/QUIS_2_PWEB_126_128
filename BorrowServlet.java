@@ -15,7 +15,6 @@ public class BorrowServlet extends HttpServlet {
     private BorrowingDAO borrowingDAO;
     private BookDAO bookDAO;
 
-    // Inisialisasi DAO saat Servlet dibuat
     public void init() {
         borrowingDAO = new BorrowingDAO();
         bookDAO = new BookDAO();
@@ -25,7 +24,6 @@ public class BorrowServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        // Cek Login Session
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
 
@@ -50,7 +48,6 @@ public class BorrowServlet extends HttpServlet {
         }
     }
 
-    // Logika Meminjam
     private void handleBorrow(HttpServletRequest request, HttpServletResponse response, int userId) throws IOException {
         int bookId = Integer.parseInt(request.getParameter("bookId"));
 
@@ -65,30 +62,25 @@ public class BorrowServlet extends HttpServlet {
         response.sendRedirect("borrow?action=history");
     }
 
-    // Logika Mengembalikan
     private void handleReturn(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int borrowId = Integer.parseInt(request.getParameter("borrowId"));
         int bookId = Integer.parseInt(request.getParameter("bookId"));
 
-        // 1. Update status peminjaman jadi 'returned'
         boolean returned = borrowingDAO.returnBook(borrowId);
 
         if (returned) {
-            // 2. Kembalikan stok buku
             bookDAO.increaseStock(bookId);
         }
 
         response.sendRedirect("borrow?action=history");
     }
 
-    // Logika Menampilkan History
     private void showHistory(HttpServletRequest request, HttpServletResponse response, int userId)
             throws ServletException, IOException {
-        // Ambil data dari DAO
         List<Borrowing> historyList = borrowingDAO.getHistoryByUserId(userId);
 
-        // Kirim data ke JSP
         request.setAttribute("historyList", historyList);
         request.getRequestDispatcher("history.jsp").forward(request, response);
     }
+
 }
