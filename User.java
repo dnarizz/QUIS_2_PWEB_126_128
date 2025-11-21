@@ -10,11 +10,9 @@ public class User {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    // 1. Constructor Kosong (Penting untuk fleksibilitas)
     public User() {
     }
 
-    // 2. Constructor Lengkap (Biasanya saat mengambil data dari DB)
     public User(int id, String name, String email, String password, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.name = name;
@@ -24,14 +22,12 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    // 3. Constructor Simpel (Biasanya saat User baru register)
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
-    // --- Getter dan Setter ---
 
     public int getId() {
         return id;
@@ -80,4 +76,5 @@ public class User {
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }
