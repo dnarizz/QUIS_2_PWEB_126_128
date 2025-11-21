@@ -52,9 +52,8 @@ public class AuthServlet extends HttpServlet {
             int userId = userDAO.getUserId(email);
             session.setAttribute("userId", userId);
             session.setAttribute("userEmail", email);
-            response.sendRedirect("books?action=list"); // Redirect ke Dashboard
+            response.sendRedirect("books?action=list");
         } else {
-            // Sebaiknya pakai Request Dispatcher untuk kirim pesan error
             response.sendRedirect("login.jsp?error=invalid");
         }
     }
@@ -71,8 +70,9 @@ public class AuthServlet extends HttpServlet {
     private void processLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate(); // Hapus semua session
+            session.invalidate();
         }
         response.sendRedirect("index.jsp");
     }
+
 }
