@@ -32,8 +32,6 @@ public class BookServlet extends HttpServlet {
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
                 break;
 
-
-            // DETAIL BUKU
             case "detail":
                 try {
                     int detailId = Integer.parseInt(request.getParameter("id"));
@@ -45,13 +43,10 @@ public class BookServlet extends HttpServlet {
                 }
                 break;
 
-            // FORM TAMBAH BUKU
             case "new":
-                // forward ke form (kosong)
                 request.getRequestDispatcher("form-book.jsp").forward(request, response);
                 break;
 
-            // FORM EDIT BUKU
             case "edit":
                 try {
                     int editId = Integer.parseInt(request.getParameter("id"));
@@ -63,7 +58,6 @@ public class BookServlet extends HttpServlet {
                 }
                 break;
 
-            // HAPUS BUKU
             case "delete":
                 try {
                     int deleteId = Integer.parseInt(request.getParameter("id"));
@@ -83,7 +77,6 @@ public class BookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // pastikan encoding agar karakter unicode tidak rusak
         request.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
@@ -115,15 +108,14 @@ public class BookServlet extends HttpServlet {
             Book book = new Book(id, title, author, genre, stock, description);
 
             if (id > 0) {
-                bookDAO.updateBook(book);  // UPDATE
+                bookDAO.updateBook(book);  
             } else {
-                bookDAO.insertBook(book);  // INSERT
-            }
+                bookDAO.insertBook(book); 
 
             response.sendRedirect("books?action=list");
         } else {
-            // jika ada aksi lain POST, redirect ke list
             response.sendRedirect("books?action=list");
         }
     }
 }
+
