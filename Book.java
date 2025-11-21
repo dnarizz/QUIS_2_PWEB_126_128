@@ -17,7 +17,6 @@ public class Book {
         this.description = description;
     }
 
-    // Constructor tanpa ID untuk insert
     public Book(String title, String author, String genre, int stock, String description) {
         this.title = title;
         this.author = author;
@@ -50,4 +49,5 @@ public class Book {
     public String getDescription() {
         return description;
     }
+
 }
